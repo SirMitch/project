@@ -1,1 +1,0 @@
-Initial content for test_file_1.txt to test full text updates and diff generation.
