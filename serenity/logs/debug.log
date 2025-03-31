@@ -1,0 +1,15 @@
+2025-03-25 06:46:02,874 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:35 - Initializing event handler...
+2025-03-25 06:46:02,885 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:91 - Event processor started
+2025-03-25 06:46:02,886 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:39 - Event handler initialized successfully
+2025-03-25 06:50:21,087 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:35 - Initializing event handler...
+2025-03-25 06:50:21,089 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:91 - Event processor started
+2025-03-25 06:50:21,089 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:39 - Event handler initialized successfully
+2025-03-25 06:57:03,294 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:35 - Initializing event handler...
+2025-03-25 06:57:03,295 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:91 - Event processor started
+2025-03-25 06:57:03,296 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:39 - Event handler initialized successfully
+2025-03-25 06:57:03,296 - Serenity - ERROR - G:\project\serenity\core\main.py:87 - System initialization failed: 'SerenityLogger' object has no attribute 'set_config'
+2025-03-25 06:57:03,296 - Serenity - ERROR - G:\project\serenity\core\main.py:107 - System startup failed: 'SerenityLogger' object has no attribute 'set_config'
+2025-03-25 06:57:03,297 - Serenity - INFO - G:\project\serenity\core\main.py:114 - Shutting down Serenity system...
+2025-03-25 06:57:03,297 - Serenity.Events - DEBUG - G:\project\serenity\utils\event_handler.py:213 - Event emitted: system_stopped
+2025-03-25 06:57:03,299 - Serenity.Events - INFO - G:\project\serenity\utils\event_handler.py:240 - Event handler stopped
+2025-03-25 06:57:04,300 - Serenity - ERROR - G:\project\serenity\core\main.py:128 - System shutdown failed: 'SerenityLogger' object has no attribute 'stop'

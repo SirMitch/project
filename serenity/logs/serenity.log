@@ -1,0 +1,14 @@
+2025-03-25 06:46:02,874 - Serenity.Events - INFO - Initializing event handler...
+2025-03-25 06:46:02,885 - Serenity.Events - INFO - Event processor started
+2025-03-25 06:46:02,886 - Serenity.Events - INFO - Event handler initialized successfully
+2025-03-25 06:50:21,087 - Serenity.Events - INFO - Initializing event handler...
+2025-03-25 06:50:21,089 - Serenity.Events - INFO - Event processor started
+2025-03-25 06:50:21,089 - Serenity.Events - INFO - Event handler initialized successfully
+2025-03-25 06:57:03,294 - Serenity.Events - INFO - Initializing event handler...
+2025-03-25 06:57:03,295 - Serenity.Events - INFO - Event processor started
+2025-03-25 06:57:03,296 - Serenity.Events - INFO - Event handler initialized successfully
+2025-03-25 06:57:03,296 - Serenity - ERROR - System initialization failed: 'SerenityLogger' object has no attribute 'set_config'
+2025-03-25 06:57:03,296 - Serenity - ERROR - System startup failed: 'SerenityLogger' object has no attribute 'set_config'
+2025-03-25 06:57:03,297 - Serenity - INFO - Shutting down Serenity system...
+2025-03-25 06:57:03,299 - Serenity.Events - INFO - Event handler stopped
+2025-03-25 06:57:04,300 - Serenity - ERROR - System shutdown failed: 'SerenityLogger' object has no attribute 'stop'

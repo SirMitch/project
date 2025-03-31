@@ -1,0 +1,223 @@
+# Serenity Project Changelog
+
+All notable changes to the Serenity project will be documented in this file.
+
+## [Unreleased]
+- Planned: Centralize `SerenityTools` in `utils/tools.py` and update all files to import it.
+
+## 2025-03-29
+### Changed
+- **`core/main.py` (1.0.8 to 1.0.9)**
+  - Fixed GUI not opening by ensuring `SerenityGUI.start()` runs in the main thread, not a separate thread.
+  - Replaced mock `SerenityTools` class with import from `utils/tools.py` (Version 1.6.1).
+  - Replaced dynamic imports with direct imports for `AIProcessor`, `MemoryManager`, `NetworkHandler`, and `SecurityGuardian`.
+  - Added diagnostic event for successful system startup.
+  - Improved error handling in `stop()` method by wrapping `events.stop()` and `logger.stop()` in try-except blocks.
+  - Removed redundant `stop()` call after `app.exec_()`.
+  - Prevented duplicate file handlers in `setup_logging()`.
+- **`gui/chat_box.py` (1.0.5 to 1.0.6)**
+  - Fixed `NameError` by removing the mock `SerenityTools` class, which lacked a logging import.
+  - Imported the real `SerenityTools` from `utils/tools.py` (Version 1.6.1).
+  - Passed the `events` parameter to `SerenityTools` for diagnostic event support.
+  - Updated dependency installation to use the real `SerenityTools` methods.
+  - Added a diagnostic event for `SerenityTools` initialization.
+  - Verified diagnostic event subscriptions (`voice_diagnostic`, `system_diagnostic`, etc.) are functional.
+
+## 2025-03-28
+### Changed
+- **`gui/chat_box.py` (1.0.4 to 1.0.5)**
+  - Added a `QTabWidget` with "Chat" and "Debug Log" tabs.
+  - Subscribed to all diagnostic events (`voice_diagnostic`, `system_diagnostic`, `config_diagnostic`, `chatbox_diagnostic`, `chatbox_diagnostic_state`) and displayed them in the debug log.
+  - Added developer tool controls: "Run Diagnostics," "Clear Debug Log," and "Install Dependencies."
+  - Added a filter dropdown to show specific message types (All, Errors, Info, Debug).
+  - Updated the test suite to include tests for the debug log functionality.
+  - Ensured modularity as a chat window section for integration into `interface.py`.
+- **`utils/config_manager.py` (1.0.0 to 1.0.1)**
+  - Added logging with `SerenityLogger` for detailed tracking.
+  - Added diagnostic event emissions (`config_diagnostic`) for errors.
+  - Integrated `SerenityTools` for dependency management, replacing `ensure_package`.
+  - Added user-specific configuration support with `load_user_config` and `save_user_config`.
+  - Added configuration file watching with `watch_config` to detect changes dynamically.
+  - Added validation for configuration values.
+  - Expanded default configurations for all modules.
+  - Added a test suite to verify functionality.
+- **`gui/chat_box.py` (1.0.3 to 1.0.4)**
+  - Added `SerenityTools` for dependency management.
+  - Added subscriptions to `voice_diagnostic` and `system_diagnostic` events.
+  - Added "Diagnose" and "Clear Chat" buttons.
+  - Added a status bar to show the latest diagnostic message.
+  - Added a shutdown confirmation dialog.
+  - Used `QTimer.singleShot` for thread-safe UI updates.
+  - Added a test suite to simulate events and verify behavior.
+
+## 2025-03-26
+### Changed
+- **`voice/processor.py` (1.0.2 to 1.0.3)**
+  - Added `SerenityTools` for dependency management.
+  - Added `select_microphone` to allow switching microphones.
+  - Added retry logic in `listen_loop` for temporary microphone failures.
+  - Added speech engine configuration (voice selection, volume).
+  - Added a speech queue and `speech_loop` for efficient `speak_response` handling.
+  - Enhanced diagnostics with speech engine checks and queue size monitoring.
+  - Added timestamps to diagnostic events.
+  - Added a test suite to verify functionality.
+- **`ai_engine/core.py` (1.0.18 to 1.0.19)**
+  - Added `SerenityTools` for dependency management.
+  - Added `process_with_context` for context-aware responses.
+  - Added `load_model` and `unload_model` for dynamic model management.
+  - Added `diagnose` method for AI health checks.
+  - Added retry logic for model loading.
+  - Enhanced error handling with diagnostic events.
+  - Added a test suite to verify functionality.
+- **`utils/event_handler.py` (1.0.3 to 1.0.4)**
+  - Added priority-based event handling.
+  - Added event queuing for high-priority events.
+  - Added diagnostic event emissions for errors.
+  - Added a test suite to verify event handling.
+- **`core/main.py` (1.0.7 to 1.0.8)**
+  - Added `SerenityTools` for dependency management.
+  - Added diagnostic event handling for system issues.
+  - Added a `diagnose` method to check system health.
+  - Added proper shutdown handling.
+  - Added a test suite to verify system startup and shutdown.
+
+### Added
+- **`gui/log_viewer.py` (1.0.0)**
+  - Initial version.
+  - Created log viewer for GUI to display system logs.
+- **`gui/sensor_suite.py` (1.0.0)**
+  - Initial version.
+  - Created sensor suite for GUI to display sensor data.
+
+## 2025-03-25
+### Changed
+- **`utils/tools.py` (1.6.0 to 1.6.1)**
+  - Added support for `events` parameter in `SerenityTools` initialization.
+  - Added diagnostic event emissions for dependency installation.
+- **`system_monitor.py` (1.0.0 to 1.0.1)**
+  - Added diagnostic event emissions for system monitoring.
+  - Improved resource usage tracking.
+- **`network/handler.py` (1.0.0 to 1.0.1)**
+  - Added diagnostic event emissions for network issues.
+  - Improved connection stability with retry logic.
+
+### Added
+- **`utils/config_manager.py` (1.0.0)**
+  - Initial version.
+  - Added configuration management with file loading and saving.
+- **`utils/logger.py` (1.0.0)**
+  - Initial version.
+  - Added `SerenityLogger` for centralized logging.
+- **`utils/data_processor.py` (1.0.0)**
+  - Initial version.
+  - Added data processing module.
+- **`security/guardian.py` (1.0.0)**
+  - Initial version.
+  - Added security module for system protection.
+- **`voice/processor.py` (1.0.0 to 1.0.2)**
+  - Initial version (1.0.0).
+  - Added basic voice processing with `speechrecognition` and `pyttsx3` (1.0.1).
+  - Added diagnostic event emissions for voice processing (1.0.2).
+
+## 2024-12-24
+### Added
+- **`core/main.py` (1.0.0 to 1.0.7)**
+  - Initial version (1.0.0).
+  - Added basic system controller with module initialization (1.0.1).
+  - Added logging with `SerenityLogger` (1.0.2).
+  - Added event handling with `EventHandler` (1.0.3).
+  - Added GUI integration with `SerenityGUI` (1.0.4).
+  - Added error handling and debug info saving (1.0.5).
+  - Added health alert handling (1.0.6).
+  - Added mock `SerenityTools` for dependency management (1.0.7).
+- **`gui/interface.py` (1.0.0 to 1.2.6)**
+  - Initial version (1.0.0).
+  - Added basic GUI window with `QMainWindow` (1.1.0).
+  - Integrated `ChatBox` widget (1.2.0).
+  - Added event subscriptions for diagnostics (1.2.1).
+  - Added layout management with `QVBoxLayout` (1.2.2).
+  - Added status bar for system messages (1.2.3).
+  - Added menu bar with diagnostic options (1.2.4).
+  - Added shutdown handling (1.2.5).
+  - Added test suite for GUI functionality (1.2.6).
+- **`gui/chat_box.py` (1.0.0 to 1.0.3)**
+  - Initial version (1.0.0).
+  - Added basic chat window with `QTextEdit` and `QLineEdit` (1.0.1).
+  - Added event handling for user input (1.0.2).
+  - Added basic diagnostic display (1.0.3).
+- **`utils/event_handler.py` (1.0.0 to 1.0.3)**
+  - Initial version (1.0.0).
+  - Added basic event subscription and emission (1.0.1).
+  - Added threading for event processing (1.0.2).
+  - Added error handling for event processing (1.0.3).
+- **`system_monitor.py` (1.0.0)**
+  - Initial version.
+  - Added system monitoring for CPU and memory usage.
+- **`ai_engine/core.py` (1.0.0 to 1.0.18)**
+  - Initial version (1.0.0).
+  - Added basic AI processing (1.0.1 to 1.0.10).
+  - Added model loading and inference (1.0.11 to 1.0.15).
+  - Added error handling and logging (1.0.16 to 1.0.18).
+- **`memory/manager.py` (1.0.0)**
+  - Initial version.
+  - Added memory management with SQLite database.
+- **`network/handler.py` (1.0.0)**
+  - Initial version.
+  - Added network handling with `websockets`.
+- **`learning/engine.py` (1.0.0)**
+  - Initial version.
+  - Added learning engine for AI training.
+- **`learning/pattern_recognition.py` (1.0.0)**
+  - Initial version.
+  - Added pattern recognition for data analysis.
+- **`persona/manager.py` (1.0.0)**
+  - Initial version.
+  - Added persona management for user interaction.
+- **`tests/test_ai_processor.py` (1.0.0)**
+  - Initial version.
+  - Added test suite for `ai_engine/core.py`.
+
+  ## 2025-03-30
+### Changed
+- **`gui/interface.py` (1.2.6 to 1.2.7)**
+  - Fixed GUI not opening by initializing `SensorSuite`, `LogViewer`, and `ChatBox` widgets before the initial `show()` call.
+  - Removed placeholder widgets and added actual widgets directly in the layout.
+  - Removed redundant `show()` call in `start()` method.
+  - Added null checks for widgets in `update_gui_layout()` to prevent crashes.
+  - Removed `QApplication.quit()` from `stop()` method to prevent premature application exit.
+  - Added diagnostic logging for GUI layout updates.
+  
+  ## 2025-03-30
+### Changed
+- **`gui/interface.py` (1.2.7 to 1.2.8)**
+  - Added detailed logging in `set_events()` to debug GUI initialization failure.
+  - Re-raised exceptions in `set_events()` to ensure errors are visible in the output.
+  
+  ## 2025-03-30
+### Changed
+- **`gui/interface.py` (1.2.8 to 1.2.9)**
+  - Added a temporary standalone logger (`SerenityGUIStandalone`) to bypass potential logging configuration issues with `SerenityTools` logger.
+  
+  ## 2025-03-30
+### Changed
+- **`gui/interface.py` (1.2.9 to 1.2.10)**
+  - Removed standalone logger and reverted to `SerenityTools` logger.
+  - Added `print` statements to trace execution flow in all methods.
+  - Added exception raising in all methods to ensure errors are caught.
+- **`core/main.py` (1.0.9 to 1.0.10)**
+  - Added try-except block around GUI initialization in `start` method to catch unhandled exceptions.
+  - Added `print` statements in `configure_module`, `start`, and `stop` to trace execution flow.
+  
+  ## 2025-03-31
+### Changed
+- **`core/main.py` (1.0.10 to 1.0.11)**
+  - Removed mock override of `SerenityGUI` in `if __name__ == "__main__":` block to ensure the real GUI is used.
+  - Simplified `if __name__ == "__main__":` block to run the system without mocks.
+  
+  ## 2025-03-31
+### Changed
+- **`ai_engine/core.py` (1.0.18 to 1.0.19)**
+  - Added missing `import transformers` to fix AI initialization failure (`NameError: name 'transformers' is not defined`).
+  - Added error handling for cases where the `transformers` library is not installed.
+  
+  

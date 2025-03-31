@@ -1,0 +1,14 @@
+{"timestamp": "2025-03-25T06:46:02.874764", "name": "Serenity.Events", "level": "INFO", "message": "Initializing event handler...", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 35}
+{"timestamp": "2025-03-25T06:46:02.885702", "name": "Serenity.Events", "level": "INFO", "message": "Event processor started", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 91}
+{"timestamp": "2025-03-25T06:46:02.886185", "name": "Serenity.Events", "level": "INFO", "message": "Event handler initialized successfully", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 39}
+{"timestamp": "2025-03-25T06:50:21.087712", "name": "Serenity.Events", "level": "INFO", "message": "Initializing event handler...", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 35}
+{"timestamp": "2025-03-25T06:50:21.089287", "name": "Serenity.Events", "level": "INFO", "message": "Event processor started", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 91}
+{"timestamp": "2025-03-25T06:50:21.089650", "name": "Serenity.Events", "level": "INFO", "message": "Event handler initialized successfully", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 39}
+{"timestamp": "2025-03-25T06:57:03.294912", "name": "Serenity.Events", "level": "INFO", "message": "Initializing event handler...", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 35}
+{"timestamp": "2025-03-25T06:57:03.295881", "name": "Serenity.Events", "level": "INFO", "message": "Event processor started", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 91}
+{"timestamp": "2025-03-25T06:57:03.296133", "name": "Serenity.Events", "level": "INFO", "message": "Event handler initialized successfully", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 39}
+{"timestamp": "2025-03-25T06:57:03.296609", "name": "Serenity", "level": "ERROR", "message": "System initialization failed: 'SerenityLogger' object has no attribute 'set_config'", "path": "G:\\project\\serenity\\core\\main.py", "line": 87}
+{"timestamp": "2025-03-25T06:57:03.296922", "name": "Serenity", "level": "ERROR", "message": "System startup failed: 'SerenityLogger' object has no attribute 'set_config'", "path": "G:\\project\\serenity\\core\\main.py", "line": 107}
+{"timestamp": "2025-03-25T06:57:03.297210", "name": "Serenity", "level": "INFO", "message": "Shutting down Serenity system...", "path": "G:\\project\\serenity\\core\\main.py", "line": 114}
+{"timestamp": "2025-03-25T06:57:03.299542", "name": "Serenity.Events", "level": "INFO", "message": "Event handler stopped", "path": "G:\\project\\serenity\\utils\\event_handler.py", "line": 240}
+{"timestamp": "2025-03-25T06:57:04.300316", "name": "Serenity", "level": "ERROR", "message": "System shutdown failed: 'SerenityLogger' object has no attribute 'stop'", "path": "G:\\project\\serenity\\core\\main.py", "line": 128}
