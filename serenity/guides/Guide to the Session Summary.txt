@@ -1,0 +1,227 @@
+Guide to the Session Summary (session_summary.md) for the Context Manager Program
+What is the Session Summary?
+
+The session_summary.md file is the primary input for the Context Manager Program. It tells the program what updates to 
+apply to the project files, including code changes, changelog entries, memory log updates, and action items. 
+The program (context_manager.py) reads this file, processes the updates, and generates a context_summary.md file as output 
+to summarize the project state.
+
+The session_summary.md file must follow a strict structure with specific sections, as the program parses it to extract 
+the necessary information. If the structure or required information is missing, the program will fail with an error 
+(e.g., "Invalid session summary file: Does not contain '# Session Summary'").
+How the Session Summary Works
+
+    Input Role:
+        You create or edit session_summary.md to specify the changes you want to apply to the project.
+        The file acts as a blueprint for updates, ensuring that all changes are documented and applied consistently.
+    Processing by context_manager.py:
+        The program reads session_summary.md and validates its structure.
+        It extracts updates from the sections (e.g., Code Updates, Changelog Updates) and applies them to the project files.
+        It uses the Metadata section to track the session’s context (e.g., timestamp, version).
+        It logs all actions in context_manager.log and generates context_summary.md with the results.
+    Purpose:
+        Ensures that updates are applied in a controlled, recoverable way.
+        Maintains a history of changes in PROJECT_LOG.md (via Changelog and Memory Log).
+        Provides action items for the next steps in the project.
+
+Required Information and Structure
+
+The session_summary.md file must contain the following sections in the exact order, with specific formatting. Each section has a 
+purpose and must include the required information. Below, I’ll explain each section, its requirements, and provide a detailed example.
+
+    Header:
+        Must start with # Session Summary on the first line.
+        This identifies the file as a session summary for the program.
+    Metadata Section:
+        Header: ## Metadata
+        Content: A list of key-value pairs providing context about the session.
+        Required Fields:
+            - **Timestamp**: YYYY-MM-DD HH:MM:SS (e.g., 2025-03-27 10:00:00)
+            - **Message Reference**: Reference ID (e.g., Test Message #5)
+            - **Version**: Version number (Description) (e.g., 1.0 (Test))
+        Purpose: Tracks when the session was created, its reference ID, and its version for documentation.
+    Code Updates Section:
+        Header: ## Code Updates
+        Content: A list of updates to apply to code files (e.g., gui/interface.py).
+        Required Fields for Each Update:
+            - **File**: Relative filepath (e.g., gui/interface.py)
+            - **Current Version**: Version number (must match the version in versions.json, e.g., 1.0.4)
+            - **Update Type**: Full or Method (e.g., Method for updating a specific method, Full for replacing the entire file)
+            - **Method Name**: Method name (required if Update Type is Method, e.g., stop)
+            - **Content**: (followed by the new content, enclosed between --- markers)
+        Purpose: Specifies changes to code files, ensuring the program updates the correct file and version.
+    Changelog Updates Section:
+        Header: ## Changelog Updates
+        Content: A list of entries to add to the Changelog section of PROJECT_LOG.md.
+        Required Fields for Each Entry:
+            - **Entry**: (followed by the changelog entry, enclosed between --- markers)
+            The entry must follow Markdown format, typically with a date header (e.g., ## YYYY-MM-DD) and subsections like ### Changed.
+        Purpose: Documents changes in the project changelog for tracking history.
+    Memory Log Updates Section:
+        Header: ## Memory Log Updates
+        Content: A list of entries to add to the Memory Log section of PROJECT_LOG.md.
+        Required Fields for Each Entry:
+            - **Entry**: (followed by the memory log entry, enclosed between --- markers)
+            The entry must follow Markdown format, typically with a section header (e.g., ## Entry) and a date (e.g., ### YYYY-MM-DD).
+        Purpose: Adds project notes or context to the memory log for future reference.
+    Action Items Section:
+        Header: ## Action Items
+        Content: A list of tasks or reminders for the next steps.
+        Required Fields:
+            A list of items starting with - (e.g., - Review updated code.).
+        Purpose: Provides tasks for the project team to follow up on after the session.
+
+Rules for Formatting
+
+    Section Order: The sections must appear in the exact order: Metadata, Code Updates, Changelog Updates, Memory Log Updates, Action Items.
+    Section Headers: Must use ## (e.g., ## Metadata), with no extra spaces or characters.
+    List Items: Must start with - followed by a space (e.g., - **Timestamp**: 2025-03-27 10:00:00).
+    Content Blocks: Code updates, changelog entries, and memory log entries must be enclosed between --- markers on separate lines.
+    No Extra Sections: The program only processes the specified sections; additional sections will be ignored.
+    No Missing Sections: All sections must be present, even if empty (e.g., ## Changelog Updates with no entries).
+
+Example session_summary.md
+
+Below is a detailed example of a session_summary.md file that meets all requirements. I’ll include comments (in parentheses) 
+to explain each part, but these comments should not be included in the actual file.
+markdown
+# Session Summary
+(This must be the first line, identifying the file as a session summary.)
+
+## Metadata
+(This section provides context about the session.)
+- **Timestamp**: 2025-03-27 10:00:00
+(The timestamp of when the session summary was created, in YYYY-MM-DD HH:MM:SS format.)
+- **Message Reference**: Test Message #5
+(A reference ID for tracking the session, can be any string.)
+- **Version**: 1.0 (Test)
+(The version of the session summary, with an optional description in parentheses.)
+
+## Code Updates
+(This section specifies updates to code files.)
+- **File**: gui/interface.py
+(The relative filepath of the file to update, relative to the project directory G:/project/test.)
+- **Current Version**: 1.0.4
+(The current version of the file, must match the version in versions.json.)
+- **Update Type**: Method
+(The type of update: "Method" to update a specific method, "Full" to replace the entire file.)
+- **Method Name**: stop
+(The name of the method to update, required because Update Type is "Method".)
+- **Content**:
+(The new content for the method, enclosed between --- markers.)
+---
+def stop(self):
+    try:
+        self.logger.info("GUI stopped")
+        self.close()
+        self.logger.debug("Main window closed")
+        self.running = False
+        self.logger.info("GUI shutdown completed successfully")
+    except Exception as e:
+        self.logger.error(f"Error during GUI shutdown: {e}")
+        raise
+---
+(The content must be valid Python code, indented correctly, and match the method signature.)
+
+## Changelog Updates
+(This section specifies entries to add to the Changelog in PROJECT_LOG.md.)
+- **Entry**:
+(The changelog entry, enclosed between --- markers.)
+---
+## 2025-03-27
+### Changed
+- Updated `stop` method in `gui/interface.py` to include error handling.
+---
+(The entry must follow Markdown format, typically with a date header and subsections like "Changed".)
+
+## Memory Log Updates
+(This section specifies entries to add to the Memory Log in PROJECT_LOG.md.)
+- **Entry**:
+(The memory log entry, enclosed between --- markers.)
+---
+## Entry
+### 2025-03-27
+- Updated `stop` method in GUI interface for better error handling.
+---
+(The entry must follow Markdown format, typically with a section header "Entry" and a date.)
+
+## Action Items
+(This section lists tasks for the next steps.)
+- Review updated `stop` method in `gui/interface.py`.
+- Test GUI shutdown to ensure error handling works as expected.
+(Each item must start with a dash and a space, describing a task or reminder.)
+Explanation of the Example
+
+    Header: The file starts with # Session Summary, which is required for the program to recognize it.
+    Metadata:
+        Provides the timestamp, message reference, and version of the session summary.
+        These fields are logged in context_summary.md for tracking.
+    Code Updates:
+        Specifies an update to the stop method in gui/interface.py.
+        The Current Version must match the version in versions.json (e.g., 1.0.4).
+        The Update Type is Method, so the program will replace the stop method with the new content.
+        The new content includes error handling, which will be applied to gui/interface.py.
+    Changelog Updates:
+        Adds an entry to the Changelog section of PROJECT_LOG.md, documenting the change to the stop method.
+    Memory Log Updates:
+        Adds an entry to the Memory Log section of PROJECT_LOG.md, providing context about the update.
+    Action Items:
+        Lists tasks for the project team to follow up on after the session.
+
+How context_manager.py Processes This Example
+
+    Validation:
+        Checks that the file starts with # Session Summary.
+        Ensures all required sections are present and correctly formatted.
+    Code Updates:
+        Verifies that gui/interface.py is at version 1.0.4 in versions.json.
+        Locks the file in locks.json.
+        Backs up the file to backups/.
+        Updates the stop method with the new content.
+        Increments the version to 1.0.5 in versions.json.
+    Changelog Updates:
+        Locks PROJECT_LOG.md.
+        Backs up the file.
+        Adds the changelog entry to the Changelog section.
+    Memory Log Updates:
+        Adds the memory log entry to the Memory Log section of PROJECT_LOG.md.
+        Updates the Table of Contents in the Memory Log.
+    Action Items:
+        Includes the action items in context_summary.md.
+    Output:
+        Generates context_summary.md with the project state and action items.
+        Signals completion to crash_monitor.py.
+
+Tips to Avoid Errors
+
+    Check Versions: Ensure the Current Version in the Code Updates section matches the version in versions.json. 
+	You can check this by running:
+    text
+
+    python context_manager.py list-versions
+    Follow the Format Exactly: Use the exact section headers and formatting (e.g., ## Metadata, - **Timestamp**: ).
+    No Extra Spaces: Avoid extra spaces or characters in section headers or list items.
+    Test Small Updates First: Start with a simple update to ensure the format is correct before making larger changes.
+    Backup the File: Keep a backup of session_summary.md in case you need to revert changes.
+
+What Happens if the Structure is Wrong?
+
+    If the file doesn’t start with # Session Summary, the program will fail with:
+    text
+
+Error: Invalid session summary file. It must contain '# Session Summary'.
+If a required section is missing (e.g., ## Metadata), the program will fail with a validation error.
+If the Current Version doesn’t match versions.json, the program will fail with:
+text
+Version mismatch for gui/interface.py: expected 1.0.4, found 1.0.5
+If a file is locked, the program will fail with:
+text
+
+    File gui/interface.py is already checked out
+
+Summary
+
+The session_summary.md file is the input for the Context Manager Program, specifying updates to apply to the project. 
+It must follow a strict structure with sections for Metadata, Code Updates, Changelog Updates, Memory Log Updates, and Action Items. 
+Each section has specific requirements, and the formatting must be exact to avoid errors. The example provided above is a complete, working 
+session_summary.md that you can use as a template.
